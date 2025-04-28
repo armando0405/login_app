@@ -1,0 +1,2 @@
+C:/Users/frank/Desktop/pruebas/movil/login_app/android/app/.cxx/Debug/a4d5i601/x86/CMakeFiles/edit_cache.dir
+C:/Users/frank/Desktop/pruebas/movil/login_app/android/app/.cxx/Debug/a4d5i601/x86/CMakeFiles/rebuild_cache.dir
