@@ -5,8 +5,14 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Registro')),
-      body: Padding(padding: const EdgeInsets.all(16.0), child: RegisterForm()),
+      backgroundColor: Colors.black, // Fondo oscuro consistente
+      appBar: AppBar(
+        title: Text('Registro'),
+        backgroundColor: Colors.grey[900],
+      ),
+      body: SafeArea(
+        child: RegisterForm(),
+      ),
     );
   }
 }

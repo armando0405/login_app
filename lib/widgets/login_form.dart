@@ -18,7 +18,6 @@ class _LoginFormState extends State<LoginForm> {
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
-    
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
@@ -47,13 +46,13 @@ class _LoginFormState extends State<LoginForm> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.blue[850],
-        title: Text('Login exitoso', style: TextStyle(color: Colors.white)),
+        backgroundColor: Colors.blueGrey[900],
+        title: Text('Login exitoso', style: TextStyle(color: Colors.tealAccent[200])),
         content: Text(message, style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK', style: TextStyle(color: Colors.blue[300])),
+            child: Text('OK', style: TextStyle(color: Colors.tealAccent[100])),
           ),
         ],
       ),
@@ -64,13 +63,13 @@ class _LoginFormState extends State<LoginForm> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[850],
+        backgroundColor: Colors.grey[900],
         title: Text('Error', style: TextStyle(color: Colors.red[300])),
         content: Text(message, style: TextStyle(color: Colors.white70)),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text('OK', style: TextStyle(color: Colors.blue[300])),
+            child: Text('OK', style: TextStyle(color: Colors.tealAccent[100])),
           ),
         ],
       ),
@@ -79,139 +78,159 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+    // Fondo oscuro
     return Container(
-      padding: EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Colors.grey[900],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Iniciar Sesión',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 32),
-            TextFormField(
-              controller: _emailController,
-              style: TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.grey[400]),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[700]!),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue[800]!),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                prefixIcon: Icon(Icons.email, color: Colors.grey[500]),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor ingrese su email';
-                }
-                if (!value.contains('@')) {
-                  return 'Ingrese un email válido';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: _passwordController,
-              style: TextStyle(color: Colors.white),
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-                labelStyle: TextStyle(color: Colors.grey[400]),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey[700]!),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue[800]!),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                prefixIcon: Icon(Icons.lock, color: Colors.grey[500]),
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Por favor ingrese su contraseña';
-                }
-                if (value.length < 6) {
-                  return 'La contraseña debe tener al menos 6 caracteres';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 24),
-            _isLoading
-                ? Center(child: CircularProgressIndicator(color: Colors.blue[300]))
-                : ElevatedButton(
-                    onPressed: _login,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue[800],
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: Text(
+      color: Colors.black,
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          child: Card(
+            color: Colors.grey[900],
+            elevation: 10,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: EdgeInsets.all(28),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Icon(Icons.lock_person_rounded, size: 60, color: Colors.tealAccent[100]),
+                    SizedBox(height: 16),
+                    Text(
                       'Iniciar Sesión',
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 26,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.tealAccent[100],
+                        letterSpacing: 1.2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 32),
+                    TextFormField(
+                      controller: _emailController,
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        labelStyle: TextStyle(color: Colors.tealAccent[100]),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.tealAccent[100]!),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.tealAccent[200]!, width: 2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        prefixIcon: Icon(Icons.email, color: Colors.tealAccent[100]),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor ingrese su email';
+                        }
+                        if (!value.contains('@')) {
+                          return 'Ingrese un email válido';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 18),
+                    TextFormField(
+                      controller: _passwordController,
+                      style: TextStyle(color: Colors.white),
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Contraseña',
+                        labelStyle: TextStyle(color: Colors.tealAccent[100]),
+                        filled: true,
+                        fillColor: Colors.grey[850],
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.tealAccent[100]!),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.tealAccent[200]!, width: 2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        prefixIcon: Icon(Icons.lock, color: Colors.tealAccent[100]),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Por favor ingrese su contraseña';
+                        }
+                        if (value.length < 6) {
+                          return 'La contraseña debe tener al menos 6 caracteres';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 28),
+                    _isLoading
+                        ? Center(child: CircularProgressIndicator(color: Colors.tealAccent[100]))
+                        : ElevatedButton(
+                            onPressed: _login,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.tealAccent[700],
+                              foregroundColor: Colors.black,
+                              padding: EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: Text(
+                              'Iniciar Sesión',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                    SizedBox(height: 20),
+                    Divider(color: Colors.grey[800]),
+                    SizedBox(height: 10),
+                    _buildActionButton(
+                      text: '¿No tienes cuenta? Regístrate',
+                      icon: Icons.person_add,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterScreen()),
                       ),
                     ),
-                  ),
-            SizedBox(height: 16),
-            Divider(color: Colors.grey[700]),
-            SizedBox(height: 8),
-            _buildActionButton(
-              text: '¿No tienes cuenta? Regístrate',
-              icon: Icons.person_add,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RegisterScreen()),
+                    _buildActionButton(
+                      text: 'Actualizar usuario',
+                      icon: Icons.edit,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UpdateUserScreen()),
+                      ),
+                    ),
+                    _buildActionButton(
+                      text: 'Eliminar usuario',
+                      icon: Icons.delete,
+                      color: Colors.red[300],
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DeleteUserScreen()),
+                      ),
+                    ),
+                    _buildActionButton(
+                      text: 'Ver todos los usuarios',
+                      icon: Icons.list,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserListScreen()),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            _buildActionButton(
-              text: 'Actualizar usuario',
-              icon: Icons.edit,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UpdateUserScreen()),
-              ),
-            ),
-            _buildActionButton(
-              text: 'Eliminar usuario',
-              icon: Icons.delete,
-              color: Colors.red[300],
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => DeleteUserScreen()),
-              ),
-            ),
-            _buildActionButton(
-              text: 'Ver todos los usuarios',
-              icon: Icons.list,
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UserListScreen()),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -228,11 +247,12 @@ class _LoginFormState extends State<LoginForm> {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          foregroundColor: color ?? Colors.blue[300],
-          side: BorderSide(color: Colors.grey[700]!),
+          foregroundColor: color ?? Colors.tealAccent[100],
+          side: BorderSide(color: Colors.tealAccent[100]!),
+          backgroundColor: Colors.transparent,
           padding: EdgeInsets.symmetric(vertical: 12),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         child: Row(
