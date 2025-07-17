@@ -1,3 +1,4 @@
+#en este se ara la prueba para comporbnar si funcuiona correctamete el servidpor
 import mysql.connector
 import os
 
